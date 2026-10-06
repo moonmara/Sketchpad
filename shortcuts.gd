@@ -51,7 +51,8 @@ func _input(event: InputEvent) -> void:
 	if not key.pressed or key.echo:
 		return
 	get_viewport().set_input_as_handled()
-	_change_key(key.physical_keycode)
+	if key.keycode != KEY_ESCAPE:
+		_change_key(key.physical_keycode)
 	_rebinding_action = ""
 	_refresh_labels()
 
