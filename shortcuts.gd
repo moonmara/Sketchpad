@@ -2,10 +2,14 @@ extends Control
 
 @export var editor: Editor
 
-enum actions {Brush, Eraser, PaintBucket, Dragger}
+enum ACTIONS {Brush, Eraser, PaintBucket, Dragger}
 const CONFIG_PATH = "user://shortcuts.cfg"
 const CONFIG_SECTION = "shortcuts"
 var _rebinding_action = ""
+var tool : Tool
+
+func assign_tool(tool: Tool) -> void:
+	editor.current_tool = tool
 
 func _ready() -> void:
 	_load_binds()
@@ -15,7 +19,7 @@ func _set_button(action: String) -> Button:
 	return get_node("VBoxContainer/HBox_%s/%s" % [action, action])
 
 func _refresh_labels() -> void:
-	for action in actions:
+	for action in ACTIONS:
 		var button = _set_button(action)
 		button.button_pressed = false
 		var key = InputMap.action_get_events(action)[0]
@@ -47,10 +51,7 @@ func _input(event: InputEvent) -> void:
 	if not key.pressed or key.echo:
 		return
 	get_viewport().set_input_as_handled()
-	if key.keycode in [KEY_SHIFT, KEY_CTRL, KEY_ALT, KEY_META]:
-		return
-	if key.keycode != KEY_ESCAPE:
-			_change_key(key.physical_keycode)
+	_change_key(key.physical_keycode)
 	_rebinding_action = ""
 	_refresh_labels()
 
@@ -58,19 +59,19 @@ func _change_key(new_key: int) -> void:
 	var old_key = _get_keycode(_rebinding_action)
 	if new_key == old_key:
 		return
-	for action in actions:
+	for action in ACTIONS:
 		if action != _rebinding_action and _get_keycode(action) == new_key:
 			_set_binds(action, old_key)
 			Toast.show_message("%s and %s swapped. Duplicates are not allowed.")
 			break
 	_set_binds(_rebinding_action, new_key)
-	_save_binds()	
+	_save_binds()
 
 func _get_keycode(action: String) -> int:
 	for event in InputMap.action_get_events(action):
 		if event is InputEventKey:
 			return (event as InputEventKey).physical_keycode
-	return 0	
+	return 0
 
 func _set_binds(action: String, keycode: int) -> void:
 	InputMap.action_erase_events(action)
@@ -83,11 +84,11 @@ func _set_binds(action: String, keycode: int) -> void:
 func _key_text(keycode: int) -> String:
 	var event = InputEventKey.new()
 	event.physical_keycode = keycode as Key
-	return event.as_text_keycode()	
+	return event.as_text_keycode()
 
 func _save_binds() -> void:
 	var config = ConfigFile.new()
-	for action in actions:
+	for action in ACTIONS:
 		config.set_value(CONFIG_SECTION, action, _get_keycode(action))
 	var err = config.save(CONFIG_PATH)
 	if err != OK:
@@ -100,12 +101,12 @@ func _load_binds() -> void:
 			return
 	var loaded = {}
 	var used_codes = {}
-	for action in actions:
+	for action in ACTIONS:
 		var code = config.get_value(CONFIG_SECTION, action, 0)
 		if typeof(code) != TYPE_INT or code <= 0 or used_codes.has(code):
 			push_warning("Invalid shortcut configurations. Using defaults.")
 			return
 		used_codes[code] = true
 		loaded[action] = code
-	for action in actions:
+	for action in ACTIONS:
 		_set_binds(action, loaded[action])
