@@ -41,55 +41,55 @@ offset_bottom = 52.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBox_Brush" type="HBoxContainer" parent="VBoxContainer" unique_id=1513981974]
+[node name="HBoxBrush" type="HBoxContainer" parent="VBoxContainer" unique_id=1513981974]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBox_Brush" unique_id=508319792]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxBrush" unique_id=508319792]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Brush"
 horizontal_alignment = 1
 
-[node name="Brush" type="Button" parent="VBoxContainer/HBox_Brush" unique_id=428695123]
+[node name="Brush" type="Button" parent="VBoxContainer/HBoxBrush" unique_id=428695123]
 layout_mode = 2
 
-[node name="HBox_Eraser" type="HBoxContainer" parent="VBoxContainer" unique_id=1946991071]
+[node name="HBoxEraser" type="HBoxContainer" parent="VBoxContainer" unique_id=1946991071]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBox_Eraser" unique_id=1212630590]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxEraser" unique_id=1212630590]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Eraser"
 horizontal_alignment = 1
 
-[node name="Eraser" type="Button" parent="VBoxContainer/HBox_Eraser" unique_id=1056433864]
+[node name="Eraser" type="Button" parent="VBoxContainer/HBoxEraser" unique_id=1056433864]
 layout_mode = 2
 
-[node name="HBox_PaintBucket" type="HBoxContainer" parent="VBoxContainer" unique_id=300527672]
+[node name="HBoxPaintBucket" type="HBoxContainer" parent="VBoxContainer" unique_id=300527672]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBox_PaintBucket" unique_id=247616504]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxPaintBucket" unique_id=247616504]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Paint Bucket"
 horizontal_alignment = 1
 
-[node name="PaintBucket" type="Button" parent="VBoxContainer/HBox_PaintBucket" unique_id=59438904]
+[node name="PaintBucket" type="Button" parent="VBoxContainer/HBoxPaintBucket" unique_id=59438904]
 layout_mode = 2
 
-[node name="HBox_Dragger" type="HBoxContainer" parent="VBoxContainer" unique_id=2100953156]
+[node name="HBoxDragger" type="HBoxContainer" parent="VBoxContainer" unique_id=2100953156]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBox_Dragger" unique_id=2134222850]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxDragger" unique_id=2134222850]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Dragger"
 horizontal_alignment = 1
 
-[node name="Dragger" type="Button" parent="VBoxContainer/HBox_Dragger" unique_id=626468485]
+[node name="Dragger" type="Button" parent="VBoxContainer/HBoxDragger" unique_id=626468485]
 layout_mode = 2
 
-[connection signal="pressed" from="VBoxContainer/HBox_Brush/Brush" to="." method="_on_brush_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBox_Eraser/Eraser" to="." method="_on_eraser_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBox_PaintBucket/PaintBucket" to="." method="_on_paint_bucket_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBox_Dragger/Dragger" to="." method="_on_dragger_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxBrush/Brush" to="." method="_on_brush_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxEraser/Eraser" to="." method="_on_eraser_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxPaintBucket/PaintBucket" to="." method="_on_paint_bucket_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxDragger/Dragger" to="." method="_on_dragger_pressed"]

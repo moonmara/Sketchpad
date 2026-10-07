@@ -2,21 +2,23 @@ extends Control
 
 @export var editor: Editor
 
-enum ACTIONS {Brush, Eraser, PaintBucket, Dragger}
+const ACTIONS = [
+	"Brush",
+	"Eraser",
+	"PaintBucket",
+	"Dragger",
+]
 const CONFIG_PATH = "user://shortcuts.cfg"
 const CONFIG_SECTION = "shortcuts"
-var _rebinding_action = ""
-var tool : Tool
 
-func assign_tool(tool: Tool) -> void:
-	editor.current_tool = tool
+var _rebinding_action = ""
 
 func _ready() -> void:
 	_load_binds()
 	_refresh_labels()
 
 func _set_button(action: String) -> Button:
-	return get_node("VBoxContainer/HBox_%s/%s" % [action, action])
+	return get_node("VBoxContainer/HBox%s/%s" % [action, action])
 
 func _refresh_labels() -> void:
 	for action in ACTIONS:
