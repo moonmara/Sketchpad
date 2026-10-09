@@ -1,7 +1,5 @@
 extends Control
 
-@export var editor: Editor
-
 const ACTIONS = [
 	"Brush",
 	"Eraser",
@@ -11,6 +9,7 @@ const ACTIONS = [
 const CONFIG_PATH = "user://shortcuts.cfg"
 const CONFIG_SECTION = "shortcuts"
 
+@export var editor: Editor
 var _rebinding_action = ""
 
 func _ready() -> void:
